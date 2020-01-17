@@ -31,6 +31,7 @@ function Header() {
     axios.get('http://worldclockapi.com/api/json/est/now')
         .then(res => {
             //getting date from api and applying it date.textContent
+            //also splitting the dateTime into date and time seperately using the .slice() method
             const newTime = res.data.currentDateTime.slice(11, 16)
             const newDate = res.data.currentDateTime.slice(0, -12)
             date.textContent = newDate
@@ -42,6 +43,7 @@ function Header() {
     return header
 }
 
+//variable for Header component to append to
 const headerContainer = document.querySelector('.header-container')
-
+//appending
 headerContainer.append(Header())

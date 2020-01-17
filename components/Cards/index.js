@@ -52,14 +52,19 @@ const cardContainer = document.querySelector('.cards-container')
 
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
     .then(res => {
+        //creating an array of all article keys
         const keys = Object.keys(res.data.articles)
+        //looping through keys
         for (let i = 0; i < keys.length; i++) {
+            //capturing current key in a variable
             const current = res.data.articles[keys[i]]
+            //looping through all articles in each topic
             current.forEach(article => {
+                //creating a new card for each article
                 const newArticle = newCard(article)
+                //giving the articles new data equal to the topic they're found under
                 newArticle.setAttribute('data','topic') 
                 newArticle.dataset.topic = (keys[i])
-                console.log(newArticle.getAttribute('data-topic'))
                 cardContainer.append(newArticle)
             })
 

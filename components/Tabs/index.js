@@ -27,12 +27,15 @@ function newTab(str) {
     tab.addEventListener('click', () => {
         //getting all articles
         const articles = document.querySelectorAll('.card')
-        //looping through articles
+        //looping through all articles to find the ones that match the clicked tab
         articles.forEach(card => {
+            //if article is equal to 'all then display all articles as 'block
             if (tabTest === 'all') {
                 card.style.display = 'block'
-            } else if (card.dataset.topic !== tabTest){
+            //else if the article is not equal to the topic at hand then don't display it
+            } else if (card.dataset.topic !== tabTest){ 
                 card.style.display = 'none'
+            //otherwise display the article
             } else {
                 card.style.display = 'block'
             }
@@ -42,6 +45,7 @@ function newTab(str) {
     return tab
 }
 
+//creating a variable of the div in the html that the articles need to be appended to
 const topics = document.querySelector('.topics')
 
 //getting server response and adding each response to a new tab
@@ -56,8 +60,9 @@ axios.get('https://lambda-times-backend.herokuapp.com/topics')
         console.log(err)
     })
 
+//creating new All tab for all articles
 const all = newTab('all')
 all.dataset.topic = 'all'
-
+//appending all tab to topics section
 topics.append(all)
 
