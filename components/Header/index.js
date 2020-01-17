@@ -23,9 +23,14 @@ function Header() {
         header.classList.add('header')
         date.classList.add('data')
         temp.classList.add('temp')
-        
+        //text content
+        date.textContent = 'SMARCH 28, 2019'
+        title.textContent = 'Lambda Times'
+        temp.textContent = '98°'
 
-
-
-        return header
+        return header 
 }
+
+const headerContainer = document.querySelector('.header-container')
+
+headerContainer.append(Header())
