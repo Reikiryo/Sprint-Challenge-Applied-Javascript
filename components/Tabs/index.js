@@ -29,20 +29,7 @@ function newTab(str) {
         const articles = document.querySelectorAll('.card')
         //looping through articles
         articles.forEach(card => {
-            //looping through the classes of each article
-            // card.classList.forEach(clss => {
-            //     //if the article has a class equal to the tab name then it remains
-            //     //otherwise it goes
-            //     //if the tab name is 'all' then all articles remain
-            //     if (tabTest === 'all') {
-            //         card.style.display = 'block'
-            //     } else if (clss !== tabTest) {
-            //         card.style.display = 'none'
-            //     } else {
-            //         card.style.display = 'block'
-            //     }
-            // })
-            if (card.dataset.topic === 'all') {
+            if (tabTest === 'all') {
                 card.style.display = 'block'
             } else if (card.dataset.topic !== tabTest){
                 card.style.display = 'none'
@@ -69,5 +56,8 @@ axios.get('https://lambda-times-backend.herokuapp.com/topics')
         console.log(err)
     })
 
-topics.append(newTab('all').dataset.topic = 'all')
+const all = newTab('all')
+all.dataset.topic = 'all'
+
+topics.append(all)
 
