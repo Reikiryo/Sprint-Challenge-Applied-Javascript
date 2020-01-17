@@ -11,13 +11,18 @@
 
 function newTab(str){
     //creating component peices
-    const tab = document.createElement('div')
+    const tab = document.createElement('div'),
+    tabLink = document.createElement('a')
+
+    //appending
+    tabLink.append(tab)
     //adding classes
     tab.classList.add('tab')
     //text content 
     tab.textContent = str
+    tabLink.href = "https://www.roblox.com/home"
 
-    return tab
+    return tabLink
 }
 
 const topics = document.querySelector('.topics')
