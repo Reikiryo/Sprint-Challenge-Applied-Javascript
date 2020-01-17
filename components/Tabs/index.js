@@ -12,20 +12,32 @@
 function newTab(str){
     //creating component peices
     const tab = document.createElement('div'),
-    tabLink = document.createElement('a')
+    tabTest = str
+    
 
-    //appending
-    tabLink.append(tab)
     //adding classes
     tab.classList.add('tab')
     //text content 
     tab.textContent = str
-    tabLink.href = "https://www.roblox.com/home"
+    tab.addEventListener('click', () => {
+        const articles = document.querySelectorAll('.card')
+        articles.forEach(card => {
+            card.classList.forEach(clss => {
+                if (clss !== tabTest) {
+                    card.classList.add('hidden')
+                } else {
+                    card.classList.remove('hidden')
+                }
+                console.log(card.classList)
+            })
+        })
+    })
 
-    return tabLink
+    return tab
 }
 
 const topics = document.querySelector('.topics')
+
 //getting server response and adding each response to a new tab
 //each new tab is appended to the topics section in index.html
 axios.get('https://lambda-times-backend.herokuapp.com/topics')
