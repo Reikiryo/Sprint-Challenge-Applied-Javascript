@@ -29,12 +29,33 @@ function newCard(obj) {
     //appending to card
     card.append(headline)
     card.append(author)
-
+    //appending to author
+    author.append(imgDiv)
+    author.append(authorName)
+    //appending to imgDiv
+    imgDiv.append(img)
+    //classes
+    card.classList.add('card')
+    headline.classList.add('headline')
+    author.classList.add('author')
+    imgDiv.classList.add('img-container')
+    //text content
+    headline.textContent = obj.headline
+    authorName.textContent = obj.authorName
+    //img src
+    img.src = obj.authorPhoto
 
     return card
 }
 
+const cardContainer = document.querySelector('.cards-container')
+
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
 .then(res => {
     console.log(res)
+    res.data.articles.forEach(topic => {
+        topic.forEach(article => {
+            cardContainer.append(newCard(article))
+        })
+    })
 })
