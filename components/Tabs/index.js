@@ -14,6 +14,7 @@ function newTab(str) {
     const tab = document.createElement('div')
     let tabTest = str
 
+    //changing node.js to node because the topic in the data is node
     if (tabTest === 'node.js') {
         tabTest = 'node'
     }
@@ -52,8 +53,10 @@ const topics = document.querySelector('.topics')
 //each new tab is appended to the topics section in index.html
 axios.get('https://lambda-times-backend.herokuapp.com/topics')
     .then(res => {
+        //getting server response and adding each response to a new tab
         res.data.topics.forEach(topic => {
-            topics.append(newTab(topic))
+        //each new tab is appended to the topics section in index.html
+        topics.append(newTab(topic))
         })
     })
     .catch(err => {
