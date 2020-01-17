@@ -9,6 +9,7 @@
 //  </div >
 // And add it to the DOM in the .header-container component
 
+
 function Header() {
     //creating component pieces
     const header = document.createElement('div'),
@@ -24,6 +25,12 @@ function Header() {
         date.classList.add('data')
         temp.classList.add('temp')
         //text content
+        axios.get('http://worldclockapi.com/api/json/est/now')
+        .then(res => {
+            console.log(res)
+            const newDate = res.data.currentDateTime.slice(0, -12)
+            date.textContent = newDate
+        })
         date.textContent = 'SMARCH 28, 2019'
         title.textContent = 'Lambda Times'
         temp.textContent = '98°'

@@ -11,24 +11,36 @@
 
 function newTab(str){
     //creating component peices
-    const tab = document.createElement('div'),
-    tabTest = str
+    const tab = document.createElement('div')
+    let tabTest = str
     
+    if (tabTest === 'node.js'){
+        tabTest = 'node'
+    }
 
     //adding classes
     tab.classList.add('tab')
     //text content 
     tab.textContent = str
+
+    //event listener
     tab.addEventListener('click', () => {
+        //getting all articles
         const articles = document.querySelectorAll('.card')
+        //looping through articles
         articles.forEach(card => {
+            //looping through the classes of each article
             card.classList.forEach(clss => {
-                if (clss !== tabTest) {
-                    card.classList.add('hidden')
+                //if the article has a class equal to the tab name then it remains
+                //otherwise it goes
+                //if the tab name is 'all' then all articles remain
+                if (tabTest === 'all') {
+                    card.style.display = 'block'
+                } else if (clss !== tabTest) {
+                    card.style.display = 'none'
                 } else {
-                    card.classList.remove('hidden')
+                    card.style.display = 'block'
                 }
-                console.log(card.classList)
             })
         })
     })
@@ -49,3 +61,5 @@ axios.get('https://lambda-times-backend.herokuapp.com/topics')
 .catch(err => {
     console.log(err)
 })
+
+topics.append(newTab('all'))
