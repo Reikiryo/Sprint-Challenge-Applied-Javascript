@@ -21,11 +21,11 @@
 function newCard(obj) {
     //creating component peices
     const card = document.createElement('div'),
-        headline = document.createElement('div')
-        author = document.createElement('div')
-        imgDiv = document.createElement('div')
-        img = document.createElement('img')
-        authorName = document.createElement('span')
+    headline = document.createElement('div')
+    author = document.createElement('div')
+    imgDiv = document.createElement('div')
+    img = document.createElement('img')
+    authorName = document.createElement('span')
     //appending to card
     card.append(headline)
     card.append(author)
@@ -51,18 +51,20 @@ function newCard(obj) {
 const cardContainer = document.querySelector('.cards-container')
 
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
-.then(res => {
-    const keys = Object.keys(res.data.articles)
-    for (let i = 0;i < keys.length; i++){
-        const current = res.data.articles[keys[i]]
-        current.forEach(article => {
-            const newArticle = newCard(article)
-            newArticle.classList.add(keys[i])
-            cardContainer.append(newArticle)
-        })
+    .then(res => {
+        const keys = Object.keys(res.data.articles)
+        for (let i = 0; i < keys.length; i++) {
+            const current = res.data.articles[keys[i]]
+            current.forEach(article => {
+                const newArticle = newCard(article)
+                newArticle.setAttribute('data','topic') 
+                newArticle.dataset.topic = (keys[i])
+                console.log(newArticle.getAttribute('data-topic'))
+                cardContainer.append(newArticle)
+            })
 
-    }
- })
-.catch(err => {
-    console.log(err)
-})
+        }
+    })
+    .catch(err => {
+        console.log(err)
+    })

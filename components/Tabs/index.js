@@ -9,12 +9,12 @@
 //    <div class="tab">topic here</div>
 
 
-function newTab(str){
+function newTab(str) {
     //creating component peices
     const tab = document.createElement('div')
     let tabTest = str
-    
-    if (tabTest === 'node.js'){
+
+    if (tabTest === 'node.js') {
         tabTest = 'node'
     }
 
@@ -30,18 +30,25 @@ function newTab(str){
         //looping through articles
         articles.forEach(card => {
             //looping through the classes of each article
-            card.classList.forEach(clss => {
-                //if the article has a class equal to the tab name then it remains
-                //otherwise it goes
-                //if the tab name is 'all' then all articles remain
-                if (tabTest === 'all') {
-                    card.style.display = 'block'
-                } else if (clss !== tabTest) {
-                    card.style.display = 'none'
-                } else {
-                    card.style.display = 'block'
-                }
-            })
+            // card.classList.forEach(clss => {
+            //     //if the article has a class equal to the tab name then it remains
+            //     //otherwise it goes
+            //     //if the tab name is 'all' then all articles remain
+            //     if (tabTest === 'all') {
+            //         card.style.display = 'block'
+            //     } else if (clss !== tabTest) {
+            //         card.style.display = 'none'
+            //     } else {
+            //         card.style.display = 'block'
+            //     }
+            // })
+            if (card.dataset.topic === 'all') {
+                card.style.display = 'block'
+            } else if (card.dataset.topic !== tabTest){
+                card.style.display = 'none'
+            } else {
+                card.style.display = 'block'
+            }
         })
     })
 
@@ -53,13 +60,14 @@ const topics = document.querySelector('.topics')
 //getting server response and adding each response to a new tab
 //each new tab is appended to the topics section in index.html
 axios.get('https://lambda-times-backend.herokuapp.com/topics')
-.then(res => {
-    res.data.topics.forEach(topic => {
-        topics.append(newTab(topic))
+    .then(res => {
+        res.data.topics.forEach(topic => {
+            topics.append(newTab(topic))
+        })
     })
-})
-.catch(err => {
-    console.log(err)
-})
+    .catch(err => {
+        console.log(err)
+    })
 
-topics.append(newTab('all'))
+topics.append(newTab('all').dataset.topic = 'all')
+
