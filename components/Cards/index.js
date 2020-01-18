@@ -53,6 +53,7 @@ const cardContainer = document.querySelector('.cards-container')
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
     .then(res => {
         //creating an array of all article keys
+        console.log(res.data)
         const keys = Object.keys(res.data.articles)
         //looping through keys
         for (let i = 0; i < keys.length; i++) {

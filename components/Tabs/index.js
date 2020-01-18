@@ -12,12 +12,14 @@
 function newTab(str) {
     //creating component peices
     const tab = document.createElement('div')
-    let tabTest = str
+    let data = str
 
     //changing node.js to node because the topic in the data is node
-    if (tabTest === 'node.js') {
-        tabTest = 'node'
+    if (data === 'node.js') {
+        data = 'node'
     }
+    //creating new dataset for topic name
+    tab.dataset.topic = data
 
     //adding classes
     tab.classList.add('tab')
@@ -31,10 +33,10 @@ function newTab(str) {
         //looping through all articles to find the ones that match the clicked tab
         articles.forEach(card => {
             //if article is equal to 'all then display all articles as 'block
-            if (tabTest === 'all') {
+            if (tab.dataset.topic === 'all') {
                 card.style.display = 'block'
             //else if the article is not equal to the topic at hand then don't display it
-            } else if (card.dataset.topic !== tabTest){ 
+            } else if (card.dataset.topic !== tab.dataset.topic){ 
                 card.style.display = 'none'
             //otherwise display the article
             } else {
@@ -65,7 +67,6 @@ axios.get('https://lambda-times-backend.herokuapp.com/topics')
 
 //creating new All tab for all articles
 const all = newTab('all')
-all.dataset.topic = 'all'
 //appending all tab to topics section
 topics.append(all)
 
